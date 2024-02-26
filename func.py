@@ -62,12 +62,22 @@ def procesarRespuesta(respuesta):
 	            "errorsList"      : None
              }
         else:
+            _errList = respuesta['message']['JAS Response']['errors']
+            # Python3 code to iterate over a list
+
+            for _err in _errList:
+                errorList = {
+                    "code": _err["CODE"],
+                    "title": _err["TITLE"],
+                    "desc": _err["DESC"]
+                }
+
             resultado =  {
 	            "success"         : True,
 	            "rowset"          : None,
 	            "data"            : None,
 	            "errorJde"        : False,
-	            "errorsList"      : respuesta
+	            "errorsList"      : errorList
              }
     else:  
         logging.getLogger().info(respuesta)
